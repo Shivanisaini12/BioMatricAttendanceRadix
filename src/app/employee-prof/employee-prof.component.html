@@ -1,0 +1,92 @@
+<section class="vh-100" style="background-color: #f4f5f7;">
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col col-lg-8 mb-4 mb-lg-0">
+          <div class="card mb-3" style="border-radius: .5rem;">
+            <div class="row g-0">
+              <div class="col-md-4 gradient-custom text-center text-white"
+                style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava6-bg.webp"
+                  alt="Avatar" class="img-fluid my-5" style="width: 80px;" />
+                <i class="far fa-edit mb-5"></i>
+                {{displayMsg}}
+              </div>
+              <div class="col-md-8">
+                <div *ngFor="let post of EmpList">
+                <div class="card-body p-4">
+                  <h6>Basic Information</h6>
+                  <hr class="mt-0 mb-4">
+                  <div class="row pt-1">
+                    <div class="col-6 mb-3">
+                        <h6>First Name</h6>
+                        <p class="text-muted">{{post.firstName}}</p>
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>Last Name</h6>
+                        <p class="text-muted">{{post.lastName}}</p>
+                    </div>
+                    <div class="col-6 mb-3">
+                      <h6>Email</h6>
+                      <p class="text-muted">{{post.emailId}}</p>
+                    </div>
+                    <div class="col-6 mb-3">
+                      <h6>Phone</h6>
+                      <p class="text-muted">{{post.contact}}</p>
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>Gender</h6>
+                        <p class="text-muted">{{post.gender == 'f' ? 'Female' : 'Male'}}</p>
+                    </div>
+                  </div>
+                </div>
+             </div>
+            </div>
+            <form class="border p-3 rounded" [formGroup]="profileForm" (ngSubmit)="SubmitEmpProfile()">
+                <div class="card-body p-4">
+                  <h6>Details</h6>
+                  <hr class="mt-0 mb-4">
+                  <div class="row pt-1">
+                    <div class="col-6 mb-3">
+                        <h6>Designation</h6>
+                        <select formControlName="DesignationId">
+                            <option value="" [disabled]="true">Select</option>
+                            <option *ngFor="let opt of Designation" [value]="opt.desig_Id">{{opt.designationName}}</option>
+                        </select>
+                    </div>
+                    <div class="col-6 mb-3">
+                        <h6>Employee ID</h6>
+                        <input formControlName="EmpId" type="text" />
+                        <div class="form-text text-danger" *ngIf="EmpId.errors?.['required'] 
+                        && (EmpId.touched || EmpId.dirty)">Employee Id is required!</div>
+                    </div>
+                    <div class="col-6 mb-3">
+                      <h6>Technology</h6>
+                      <select formControlName="DepartmentId" name="project">
+                        <option value="" [disabled]="true">Select</option>  
+                        <option   *ngFor="let opt of Department" [value]="opt.dept_Id">{{opt.departmentName}}</option>
+                    </select>
+                    </div>
+                    <!-- <div class="col-6 mb-3">
+                      <h6>Thumb Expression</h6>
+                      <div  *ngFor="let opt of DeviceDetails">
+                      <p>
+                       In-Time : {{opt.dateTimeHour }}
+                      </p>
+                      <p>
+                        Status : Done
+                      </p>
+                    </div>
+                    </div> -->
+                    <div class="col-6 mb-3">
+                         <h6><br/></h6>
+                         <button class="btn btn-primary" type="submit">Save</button>
+                    </div>
+                  </div>
+                </div>
+            </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
